@@ -2,13 +2,16 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
-#include "puzzle.h"
+#define MAX_STRINGS 1000
+
+
 
 int main(){
+    char scarmbled_strings[MAX_STRINGS][70]; 
     FILE *file; 
     char a,b,c[2];
     int d, totalSum = 0; 
-    char s[50]; 
+    char s[70]; 
     int N =0;
     file = fopen("source.txt", "r"); 
     if (file == NULL) {
@@ -16,11 +19,11 @@ int main(){
             return 0;
     }
 
-    while(fgets(s, 50, file)!=NULL){N++;}
+    while(fgets(s, 70, file)!=NULL){N++;}
     rewind(file);
     for(int i=0;i<N && i<MAX_STRINGS;i++){
 
-        fgets(s, 50, file);
+        fgets(s, 70, file);
         strcpy(scarmbled_strings[i], s);
         //printf("%s", s );
     }
@@ -40,7 +43,7 @@ int main(){
             
         }
 
-        for(int k = strlen(scarmbled_strings[i]); k > 0; k--)
+        for(int k = strlen(scarmbled_strings[i]); k >= 0; k--)
         {
             if(isdigit(scarmbled_strings[i][k]))
                 {
@@ -54,6 +57,7 @@ int main(){
     c[1] = b;
     c[2] = '\0';
     d = atoi(c); 
+    printf("%d\n",d);
     totalSum += d;
     }
 
